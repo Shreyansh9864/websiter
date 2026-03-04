@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SHREYANSH | THE ARCHITECT</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+    --bg:#050505;
+    --card:#111;
+    --text:#ffffff;
+    --muted:#888;
+    --accent:#00f2ff;
+    --glow: rgba(0, 242, 255, 0.5);
+}
+
+.light{
+    --bg:#ffffff;
+    --card:#f0f0f0;
+    --text:#000000;
+    --muted:#444;
+    --accent:#ff0055;
+    --glow: rgba(255, 0, 85, 0.3);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* SMOOTH GLOBAL TRANSITION */
+}
+
+body{
+    font-family:'Inter', sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x: hidden;
+}
+
+/* BIG NAVIGATION */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:40px 10%;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 1000;
+}
+
+.logo{
+    font-weight:900;
+    font-size:32px;
+    letter-spacing: -2px;
+    text-transform: uppercase;
+}
+
+nav ul{
+    display:flex;
+    gap:50px;
+    list-style:none;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+nav a:hover{
+    color:var(--accent);
+    text-shadow: 0 0 10px var(--accent);
+}
+
+/* BIGGER SUN/MOON ANIMATION */
+.toggle{
+    cursor:pointer;
+    font-size: 40px; /* BIGGER ICON */
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle:active {
+    transform: scale(0.8) rotate(360deg);
+}
+
+/* MASSIVE HERO */
+.hero{
+    padding:120px 10% 80px;
+}
+
+.welcome-tag {
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { text-shadow: 0 0 5px var(--accent); }
+    50% { text-shadow: 0 0 20px var(--accent); }
+    100% { text-shadow: 0 0 5px var(--accent); }
+}
+
+.hero h1{
+    font-size: clamp(60px, 15vw, 120px); /* MASSIVE TEXT */
+    font-weight:900;
+    line-height: 0.9;
+    margin-bottom: 30px;
+    letter-spacing: -5px;
+}
+
+.typing{
+    font-size: clamp(30px, 5vw, 50px);
+    font-weight: 900;
+    color: var(--text);
+    background: var(--accent);
+    color: var(--bg);
+    display: inline-block;
+    padding: 0 15px;
+    margin-top: 10px;
+}
+
+/* BIG CARDS */
+.section-title {
+    font-size: 60px;
+    font-weight: 900;
+    margin-bottom: 50px;
+    letter-spacing: -2px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap:40px;
+}
+
+.box{
+    background:var(--card);
+    padding:50px; /* BIGGER PADDING */
+    border-radius:40px; /* ROUNDER */
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.box h3 { font-size: 32px; margin-bottom: 15px; }
+.box p { font-size: 18px; color: var(--muted); }
+
+.box:hover{
+    border-color: var(--accent);
+    box-shadow: 0 0 50px var(--glow);
+    transform: scale(1.05);
+}
+
+/* BIGGER CONTACT ICONS */
+.contact-box i {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+footer {
+    padding: 100px 10%;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    border-top: 5px solid var(--accent);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">SHREYANSH<span style="color:var(--accent)">_</span></div>
+
+    <ul>
+        <li><a href="#stack">STACK</a></li>
+        <li><a href="#projects">WORK</a></li>
+        <li><a href="#contact">HAVE A CHAT</a></li>
+    </ul>
+
+    <div class="toggle" id="themeBtn" onclick="toggleTheme()">
+        <i class="fas fa-sun" id="themeIcon"></i>
+    </div>
+</nav>
+
+<section class="hero">
+    <span class="welcome-tag">Welcome to my world</span>
+    <h1>SHREYANSH <br>KHALI.</h1>
+    <div class="typing" id="typing"></div>
+</section>
+
+<section class="section" id="stack" style="padding: 100px 10%;">
+    <h2 class="section-title">THE STACK</h2>
+    <div class="grid">
+        <div class="box"><h3>PYTHON</h3><p>Heavy backend & AI automation.</p></div>
+        <div class="box"><h3>C LANG</h3><p>Low-level mastery in progress.</p></div>
+        <div class="box"><h3>LINUX</h3><p>Power user and distro explorer.</p></div>
+        <div class="box"><h3>ML/AI</h3><p>Deep learning and LLM research.</p></div>
+    </div>
+</section>
+
+<section class="section" id="projects" style="padding: 100px 10%;">
+    <h2 class="section-title">SELECTED WORKS</h2>
+    <div class="grid">
+        <div class="box">
+            <span style="color:var(--accent); font-weight:900;">[ HARDWARE ]</span>
+            <h3>GESTURE CAR</h3>
+            <p>Motion-tracking vehicular control.</p>
+        </div>
+        <div class="box">
+            <span style="color:var(--accent); font-weight:900;">[ VISION ]</span>
+            <h3>AI ATTENDANCE</h3>
+            <p>Real-time face recognition suite.</p>
+        </div>
+        <div class="box">
+            <span style="color:var(--accent); font-weight:900;">[ LLM ]</span>
+            <h3>DISCORD AI</h3>
+            <p>Smart bots with character personalities.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="contact" style="padding: 100px 10%;">
+    <h2 class="section-title">GET IN TOUCH</h2>
+    <div class="grid">
+        <div class="box contact-box" onclick="window.open('https://github.com/Shreyansh9864', '_blank')">
+            <i class="fab fa-github"></i>
+            <h3>GITHUB</h3>
+        </div>
+        <div class="box contact-box" onclick="window.open(, 'https://instagram.com/shreyansh_khali''_blank')">
+            <i class="fab fa-instagram"></i>
+            <h3>INSTAGRAM</h3>
+        </div>
+        <div class="box contact-box" onclick="window.open('mailto:shryeanshkivlog266@gmail.com')">
+            <i class="fas fa-envelope"></i>
+            <h3>EMAIL</h3>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 SHREYANSH KHALI — CODER. GAMER. STUDENT.
+</footer>
+
+<script>
+// TYPING ENGINE
+const words = ["CODER", "GAMER", "STUDENT", "AI DEVELOPER"];
+let i=0,j=0,current="",deleting=false;
+
+function type(){
+    current=words[i];
+    const el = document.getElementById("typing");
+    el.textContent = deleting ? current.substring(0,j--) : current.substring(0,j++);
+
+    if(!deleting && j===current.length+1){
+        deleting=true;
+        setTimeout(type,2000);
+        return;
+    }
+    if(deleting && j===0){
+        deleting=false;
+        i=(i+1)%words.length;
+    }
+    setTimeout(type,deleting?50:150);
+}
+type();
+
+// THEME MORPH ANIMATION
+function toggleTheme(){
+    const body = document.body;
+    const icon = document.getElementById("themeIcon");
+
+    body.classList.toggle("light");
+
+    // Icon Swap with Rotation
+    if(body.classList.contains("light")){
+        icon.classList.replace("fa-sun", "fa-moon");
+        icon.style.transform = "rotate(360deg) scale(1.5)";
+    } else {
+        icon.classList.replace("fa-moon", "fa-sun");
+        icon.style.transform = "rotate(0deg) scale(1)";
+    }
+}
+</script>
+
+</body>
+</html>

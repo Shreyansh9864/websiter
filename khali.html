@@ -3,98 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHREYANSH | THE ARCHITECT</title>
+<title>SHREYANSH | C | KHALI </title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-:root{
-    --bg:#050505;
-    --card:#111;
-    --text:#ffffff;
-    --muted:#888;
-    --accent:#00f2ff;
+:root {
+    --bg: #050505;
+    --card: #111;
+    --text: #ffffff;
+    --muted: #888;
+    --accent: #00f2ff;
     --glow: rgba(0, 242, 255, 0.5);
 }
 
-.light{
-    --bg:#ffffff;
-    --card:#f0f0f0;
-    --text:#000000;
-    --muted:#444;
-    --accent:#ff0055;
+.light {
+    --bg: #ffffff;
+    --card: #f0f0f0;
+    --text: #000000;
+    --muted: #444;
+    --accent: #ff0055;
     --glow: rgba(255, 0, 85, 0.3);
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* SMOOTH GLOBAL TRANSITION */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body{
-    font-family:'Inter', sans-serif;
-    background:var(--bg);
-    color:var(--text);
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
     overflow-x: hidden;
 }
 
-/* BIG NAVIGATION */
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:40px 10%;
+/* SCROLL PROGRESS */
+#scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background: var(--accent);
+    z-index: 2000;
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* NAVIGATION */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 10%;
     position: sticky;
     top: 0;
     background: var(--bg);
     z-index: 1000;
 }
 
-.logo{
-    font-weight:900;
-    font-size:32px;
+.logo {
+    font-weight: 900;
+    font-size: 32px;
     letter-spacing: -2px;
     text-transform: uppercase;
 }
 
-nav ul{
-    display:flex;
-    gap:50px;
-    list-style:none;
+.nav-links {
+    display: flex;
+    gap: 50px;
+    list-style: none;
 }
 
-nav a{
-    text-decoration:none;
-    color:var(--text);
+.nav-links a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--text);
     font-weight: 700;
     font-size: 1.2rem;
+    transition: transform 0.3s ease-out;
 }
 
-nav a:hover{
-    color:var(--accent);
+.nav-links a:hover {
+    color: var(--accent);
     text-shadow: 0 0 10px var(--accent);
 }
 
-/* BIGGER SUN/MOON ANIMATION */
-.toggle{
-    cursor:pointer;
-    font-size: 40px; /* BIGGER ICON */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 32px;
+    color: var(--accent);
+}
+
+.toggle {
+    cursor: pointer;
+    font-size: 40px;
     color: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.toggle:active {
-    transform: scale(0.8) rotate(360deg);
+@media (max-width: 900px) {
+    .hamburger { display: block; }
+    .nav-links {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        height: 100vh;
+        width: 70%;
+        background: var(--card);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+        transition: 0.5s ease-in-out;
+        box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+    }
+    .nav-links.active { right: 0; }
 }
 
-/* MASSIVE HERO */
-.hero{
-    padding:120px 10% 80px;
+/* HERO */
+.hero {
+    padding: 120px 10% 80px;
 }
 
 .welcome-tag {
@@ -114,18 +149,17 @@ nav a:hover{
     100% { text-shadow: 0 0 5px var(--accent); }
 }
 
-.hero h1{
-    font-size: clamp(60px, 15vw, 120px); /* MASSIVE TEXT */
-    font-weight:900;
+.hero h1 {
+    font-size: clamp(60px, 15vw, 120px);
+    font-weight: 900;
     line-height: 0.9;
     margin-bottom: 30px;
     letter-spacing: -5px;
 }
 
-.typing{
+.typing {
     font-size: clamp(30px, 5vw, 50px);
     font-weight: 900;
-    color: var(--text);
     background: var(--accent);
     color: var(--bg);
     display: inline-block;
@@ -133,41 +167,92 @@ nav a:hover{
     margin-top: 10px;
 }
 
-/* BIG CARDS */
+/* REVEAL ANIMATION */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s cubic-bezier(0.17, 0.55, 0.55, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* SECTIONS */
 .section-title {
-    font-size: 60px;
+    font-size: clamp(40px, 8vw, 60px);
     font-weight: 900;
     margin-bottom: 50px;
     letter-spacing: -2px;
 }
 
-.grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap:40px;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
 }
 
-.box{
-    background:var(--card);
-    padding:50px; /* BIGGER PADDING */
-    border-radius:40px; /* ROUNDER */
-    border: 2px solid transparent;
+.box {
+    background: var(--card);
+    padding: 50px;
+    border-radius: 40px;
+    border: 1px solid rgba(255,255,255,0.05);
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: border 0.3s, box-shadow 0.3s, transform 0.4s;
+}
+
+.spotlight {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at var(--x) var(--y), var(--glow), transparent 40%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1;
+}
+
+.box:hover .spotlight { opacity: 1; }
+
+.project-img-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    transition: 0.5s;
+    filter: grayscale(100%);
+    z-index: 0;
+}
+
+.box:hover .project-img-bg {
+    opacity: 0.5;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+.box-content {
+    position: relative;
+    z-index: 2;
+    transform: translateZ(30px);
 }
 
 .box h3 { font-size: 32px; margin-bottom: 15px; }
-.box p { font-size: 18px; color: var(--muted); }
+.box p { font-size: 18px; color: var(--muted); opacity: 0.8; }
 
-.box:hover{
+.box:hover {
     border-color: var(--accent);
     box-shadow: 0 0 50px var(--glow);
-    transform: scale(1.05);
+    transform: translateY(-10px);
 }
 
-/* BIGGER CONTACT ICONS */
-.contact-box i {
-    font-size: 60px;
+.stack-icon {
+    font-size: 45px;
     margin-bottom: 20px;
+    color: var(--accent);
 }
 
 footer {
@@ -182,71 +267,122 @@ footer {
 
 <body>
 
+<div id="scrollProgress"></div>
+
 <nav>
     <div class="logo">SHREYANSH<span style="color:var(--accent)">_</span></div>
-
-    <ul>
-        <li><a href="#stack">STACK</a></li>
-        <li><a href="#projects">WORK</a></li>
-        <li><a href="#contact">HAVE A CHAT</a></li>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#stack" class="mag-link" onclick="toggleMenu()">STACK</a></li>
+        <li><a href="#projects" class="mag-link" onclick="toggleMenu()">WORK</a></li>
+        <li><a href="#contact" class="mag-link" onclick="toggleMenu()">HAVE A CHAT</a></li>
     </ul>
-
-    <div class="toggle" id="themeBtn" onclick="toggleTheme()">
-        <i class="fas fa-sun" id="themeIcon"></i>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <div class="toggle" onclick="toggleTheme()">
+            <i class="fas fa-sun" id="themeIcon"></i>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars" id="menuBtn"></i>
+        </div>
     </div>
 </nav>
 
-<section class="hero">
+<section class="hero reveal">
     <span class="welcome-tag">Welcome to my world</span>
     <h1>SHREYANSH <br>KHALI.</h1>
     <div class="typing" id="typing"></div>
 </section>
 
 <section class="section" id="stack" style="padding: 100px 10%;">
-    <h2 class="section-title">THE STACK</h2>
+    <h2 class="section-title reveal">THE STACK</h2>
     <div class="grid">
-        <div class="box"><h3>PYTHON</h3><p>Heavy backend & AI automation.</p></div>
-        <div class="box"><h3>C LANG</h3><p>Low-level mastery in progress.</p></div>
-        <div class="box"><h3>LINUX</h3><p>Power user and distro explorer.</p></div>
-        <div class="box"><h3>ML/AI</h3><p>Deep learning and LLM research.</p></div>
+        <div class="box reveal">
+            <div class="spotlight"></div>
+            <div class="box-content">
+                <i class="fab fa-python stack-icon"></i>
+                <h3>PYTHON</h3>
+                <p>Heavy backend & AI automation with computer vision expertise.</p>
+            </div>
+        </div>
+        <div class="box reveal">
+            <div class="spotlight"></div>
+            <div class="box-content">
+                <i class="fas fa-microchip stack-icon"></i>
+                <h3>C LANG</h3>
+                <p>Low-level mastery, memory management, and firmware development.</p>
+            </div>
+        </div>
+        <div class="box reveal">
+            <div class="spotlight"></div>
+            <div class="box-content">
+                <i class="fab fa-linux stack-icon"></i>
+                <h3>LINUX</h3>
+                <p>Power user, shell scripting, and server architecture explorer.</p>
+            </div>
+        </div>
+        <div class="box reveal">
+            <div class="spotlight"></div>
+            <div class="box-content">
+                <i class="fas fa-brain stack-icon"></i>
+                <h3>ML/AI</h3>
+                <p>Deep learning, LLM research, and neural network implementation.</p>
+            </div>
+        </div>
     </div>
 </section>
 
 <section class="section" id="projects" style="padding: 100px 10%;">
-    <h2 class="section-title">SELECTED WORKS</h2>
+    <h2 class="section-title reveal">SELECTED WORKS</h2>
     <div class="grid">
-        <div class="box">
-            <span style="color:var(--accent); font-weight:900;">[ HARDWARE ]</span>
-            <h3>GESTURE CAR</h3>
-            <p>Motion-tracking vehicular control.</p>
+        <div class="box reveal">
+            <div class="spotlight"></div>
+            <div class="project-img-bg" style="background-image: url('https://content.instructables.com/F1Y/G7O4/K6WZXD1G/F1YG7O4K6WZXD1G.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024');"></div>
+            <div class="box-content">
+                <span style="color:var(--accent); font-weight:900;">[ HARDWARE ]</span>
+                <h3>GESTURE CONTROL CAR</h3>
+                <p>Motion-tracking ML Mediapipe HAND DETECTION using Python & Arduino.</p>
+            </div>
         </div>
-        <div class="box">
-            <span style="color:var(--accent); font-weight:900;">[ VISION ]</span>
-            <h3>AI ATTENDANCE</h3>
-            <p>Real-time face recognition suite.</p>
+        <div class="box reveal">
+            <div class="spotlight"></div>
+            <div class="project-img-bg" style="background-image: url('https://i.ibb.co/tPYKDnKS/Screenshot-2026-03-08-205557.png');"></div>
+            <div class="box-content">
+                <span style="color:var(--accent); font-weight:900;">[ VISION ]</span>
+                <h3>AI ATTENDANCE</h3>
+                <p>Real-time face recognition suite developed with OpenCV.</p>
+            </div>
         </div>
-        <div class="box">
-            <span style="color:var(--accent); font-weight:900;">[ LLM ]</span>
-            <h3>DISCORD AI</h3>
-            <p>Smart bots with character personalities.</p>
+        <div class="box reveal">
+            <div class="spotlight"></div>
+            <div class="project-img-bg" style="background-image: url('https://i.ibb.co/kV1BsmVM/Screenshot-2026-03-08-205408.png');"></div>
+            <div class="box-content">
+                <span style="color:var(--accent); font-weight:900;">[ LLM ]</span>
+                <h3>DISCORD AI</h3>
+                <p>Smart bots with custom personalities using PyCharacterAI.</p>
+            </div>
         </div>
     </div>
 </section>
 
 <section class="section" id="contact" style="padding: 100px 10%;">
-    <h2 class="section-title">GET IN TOUCH</h2>
+    <h2 class="section-title reveal">GET IN TOUCH</h2>
     <div class="grid">
-        <div class="box contact-box" onclick="window.open('https://github.com/Shreyansh9864', '_blank')">
-            <i class="fab fa-github"></i>
-            <h3>GITHUB</h3>
+        <div class="box reveal" onclick="window.open('https://github.com/Shreyansh9864', '_blank')">
+            <div class="box-content" style="text-align: center;">
+                <i class="fab fa-github" style="font-size: 60px; margin-bottom: 20px;"></i>
+                <h3>GITHUB</h3>
+            </div>
         </div>
-        <div class="box contact-box" onclick="window.open(, 'https://instagram.com/shreyansh_khali''_blank')">
-            <i class="fab fa-instagram"></i>
-            <h3>INSTAGRAM</h3>
+        <div class="box reveal" onclick="window.open('https://instagram.com/shreyansh_khali', '_blank')">
+            <div class="box-content" style="text-align: center;">
+                <i class="fab fa-instagram" style="font-size: 60px; margin-bottom: 20px;"></i>
+                <h3>INSTAGRAM</h3>
+            </div>
         </div>
-        <div class="box contact-box" onclick="window.open('mailto:shryeanshkivlog266@gmail.com')">
-            <i class="fas fa-envelope"></i>
-            <h3>EMAIL</h3>
+        <div class="box reveal" onclick="window.open('mailto:shryeanshkivlog266@gmail.com')">
+            <div class="box-content" style="text-align: center;">
+                <i class="fas fa-envelope" style="font-size: 60px; margin-bottom: 20px;"></i>
+                <h3>EMAIL</h3>
+            </div>
         </div>
     </div>
 </section>
@@ -258,35 +394,69 @@ footer {
 <script>
 // TYPING ENGINE
 const words = ["CODER", "GAMER", "STUDENT", "AI DEVELOPER"];
-let i=0,j=0,current="",deleting=false;
+let i = 0, j = 0, current = "", deleting = false;
 
-function type(){
-    current=words[i];
+function type() {
+    current = words[i];
     const el = document.getElementById("typing");
-    el.textContent = deleting ? current.substring(0,j--) : current.substring(0,j++);
-
-    if(!deleting && j===current.length+1){
-        deleting=true;
-        setTimeout(type,2000);
-        return;
-    }
-    if(deleting && j===0){
-        deleting=false;
-        i=(i+1)%words.length;
-    }
-    setTimeout(type,deleting?50:150);
+    el.textContent = deleting ? current.substring(0, j--) : current.substring(0, j++);
+    if (!deleting && j === current.length + 1) { deleting = true; setTimeout(type, 2000); return; }
+    if (deleting && j === 0) { deleting = false; i = (i + 1) % words.length; }
+    setTimeout(type, deleting ? 50 : 150);
 }
 type();
 
-// THEME MORPH ANIMATION
-function toggleTheme(){
+// SPOTLIGHT + 3D TILT
+document.querySelectorAll('.box').forEach(box => {
+    box.addEventListener('mousemove', e => {
+        const rect = box.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        box.style.setProperty('--x', x + 'px');
+        box.style.setProperty('--y', y + 'px');
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 15;
+        const rotateY = (centerX - x) / 15;
+        box.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+    });
+
+    box.addEventListener('mouseleave', () => {
+        box.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+    });
+});
+
+// REVEAL ON SCROLL
+const reveal = () => {
+    document.querySelectorAll('.reveal').forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) el.classList.add('active');
+    });
+};
+window.addEventListener('scroll', reveal);
+reveal();
+
+// MAGNETIC LINKS
+document.querySelectorAll('.mag-link').forEach(link => {
+    link.addEventListener('mousemove', e => {
+        const rect = link.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        link.style.transform = `translate(${x * 0.4}px, ${y * 0.4}px)`;
+    });
+    link.addEventListener('mouseleave', () => {
+        link.style.transform = `translate(0px, 0px)`;
+    });
+});
+
+// THEME TOGGLE
+function toggleTheme() {
     const body = document.body;
     const icon = document.getElementById("themeIcon");
-
     body.classList.toggle("light");
-
-    // Icon Swap with Rotation
-    if(body.classList.contains("light")){
+    if (body.classList.contains("light")) {
         icon.classList.replace("fa-sun", "fa-moon");
         icon.style.transform = "rotate(360deg) scale(1.5)";
     } else {
@@ -294,6 +464,23 @@ function toggleTheme(){
         icon.style.transform = "rotate(0deg) scale(1)";
     }
 }
+
+// MOBILE MENU
+function toggleMenu() {
+    const nav = document.getElementById("navLinks");
+    const menuBtn = document.getElementById("menuBtn");
+    nav.classList.toggle("active");
+    menuBtn.classList.toggle("fa-bars");
+    menuBtn.classList.toggle("fa-times");
+}
+
+// SCROLL PROGRESS
+window.onscroll = () => {
+    let winScroll = document.documentElement.scrollTop;
+    let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let scrolled = (winScroll / height) * 100;
+    document.getElementById("scrollProgress").style.width = scrolled + "%";
+};
 </script>
 
 </body>
